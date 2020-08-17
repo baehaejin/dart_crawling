@@ -2,7 +2,7 @@ class DartKey:
     """
     dart key class
     """
-    __privateApi_key = 'input your api key'
+    __privateApi_key = '90741620383633425ef66384ecd1721aa913c94a'
 
     def get_key(self):
         return self.__privateApi_key
