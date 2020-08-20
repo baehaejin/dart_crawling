@@ -6,7 +6,7 @@ import time
 
 def get_rcrpt_no(corp_name, corp_code, bgn_de, end_de, page_no, page_count):
     today = time.strftime('%Y%m%d', time.localtime(time.time()))
-    print(today)
+    print("today is : " + today)
 
     rcept_no_list = []
 
@@ -43,9 +43,7 @@ def get_rcrpt_no(corp_name, corp_code, bgn_de, end_de, page_no, page_count):
            "&end_de=" + end_de +
            "&page_no=" + page_no +
            "&page_count=" + page_count)
-    print(url)
     open_url = urlopen(url)
-    print(open_url)
     html = open_url.read().decode()
     soup = BeautifulSoup(html, 'html.parser')
     res = soup.find_all('list')
@@ -67,3 +65,6 @@ def get_rcrpt_no(corp_name, corp_code, bgn_de, end_de, page_no, page_count):
                 rcept_no_list.append(rcept_no)
                 print(report_nm + " 가 추가되었습니다")
     return rcept_no_list
+
+
+
