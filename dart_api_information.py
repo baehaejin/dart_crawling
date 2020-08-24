@@ -38,7 +38,7 @@ class DartUrl:
         :return: this return url that you can get rcept_no
         """
         return __privateGetReceptionNoUrl
-    
+
     @staticmethod
     def get_document_url():
         # this url get document by rcept_no and api key
@@ -49,4 +49,5 @@ class DartUrl:
         : &rcept_no=recept number
         """
         return __privateGetDocumentURL
+
 
