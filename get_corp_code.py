@@ -22,14 +22,11 @@ def get_corp_code(corp_name, stock_code):
     corp_code = ""
     corp_name_list = []
 
-    # temp
-    stock_code = "000250"
-
-    if corp_name == "":
-        corp_name = "do not search by this"
-    elif stock_code == "" and corp_name == "":
+    if stock_code == "" and corp_name == "":
         print("해당 기업의 정보가 존재하지 않습니다.")
-        return -1
+        return -1, "error"
+    elif corp_name == "":
+        corp_name = "do not search by this"
 
     # The bytes of the received resp are accumulated in the buffer and the zip file is loaded.
     openurl = urlopen(url)
@@ -57,7 +54,7 @@ def get_corp_code(corp_name, stock_code):
     # find one corp_code
     if len(corp_name_list) == 0:
         print("해당 기업의 정보가 존재하지 않습니다.")
-        return -1
+        return -1, "error"
     elif len(corp_name_list) == 1:
         corp_name = corp_name_list[0].find('corp_name').get_text()
         print("선택하신 종목 : " + corp_name)
@@ -80,4 +77,4 @@ def get_corp_code(corp_name, stock_code):
                 stock_code = name_list.find('stock_code').get_text()
                 break
 
-    return corp_code
+    return corp_code, corp_name

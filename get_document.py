@@ -7,9 +7,6 @@ import dart_api_information
 
 def get_document(rcept_no):
 
-    # temp
-    rcept_no = "20200814001652"
-
     document = []
     api_key = dart_api_information.DartKey.get_key()
     api_url = dart_api_information.DartUrl.get_document_url()

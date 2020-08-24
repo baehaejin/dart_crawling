@@ -10,14 +10,6 @@ def get_rcrpt_no(corp_name, corp_code, bgn_de, end_de, page_no, page_count):
 
     rcept_no_list = []
 
-    # temp
-    corp_name = "삼천당제약"
-    corp_code = "00128546"
-    bgn_de = "20100817"
-    end_de = "20200817"
-    page_no = "1"
-    page_count = "10"
-
     # get url and api_key from dart_api_information
     api_key = dart_api_information.DartKey.get_key()
     api_url = dart_api_information.DartUrl.get_rcept_no_url()
