@@ -67,4 +67,7 @@ def get_rcrpt_no(corp_name, corp_code, bgn_de, end_de, page_no, page_count):
     return rcept_no_list
 
 
+print(get_rcrpt_no("", "", "", "", "", ""))
+
+
 

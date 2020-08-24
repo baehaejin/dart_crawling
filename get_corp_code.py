@@ -1,4 +1,3 @@
-import requests
 from urllib.request import urlopen
 from zipfile import ZipFile
 from io import BytesIO
@@ -17,8 +16,8 @@ def get_corp_code(corp_name, stock_code):
     """
     # get url and api_key from dart_api_information
     api_key = dart_api_information.DartKey.get_key()
-    url = dart_api_information.DartUrl.get_corp_code_url()
-    url = url + "?crtfc_key=" + api_key
+    api_url = dart_api_information.DartUrl.get_corp_code_url()
+    url = api_url + "?crtfc_key=" + api_key
 
     corp_code = ""
     corp_name_list = []
