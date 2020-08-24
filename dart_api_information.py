@@ -22,3 +22,20 @@ class DartUrl:
         :return: this return url that you can get corp_code
         """
         return __privateGetCorpCodeUrl
+
+    @staticmethod
+    def get_rcept_no_url():
+        # this url get rcept_no by input corp_code and bgn_de and end_de
+        __privateGetReceptionNoUrl = "https://opendart.fss.or.kr/api/list.xml"
+        """
+        you need to add
+        : ?crtfc_key=your own api key
+        : &corp_code=corporation code
+        : &bgn_de=beginning day to search public notice
+        : &end_de=ending day to search public notice
+        : &page_no=
+        : &page_count=
+        :return: this return url that you can get rcept_no
+        """
+        return __privateGetReceptionNoUrl
+    
