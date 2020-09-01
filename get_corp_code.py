@@ -1,4 +1,3 @@
-import requests
 from urllib.request import urlopen
 from zipfile import ZipFile
 from io import BytesIO
@@ -17,20 +16,18 @@ def get_corp_code(corp_name, stock_code):
     """
     # get url and api_key from dart_api_information
     api_key = dart_api_information.DartKey.get_key()
-    url = dart_api_information.DartUrl.get_corp_code_url()
-    url = url + "?crtfc_key=" + api_key
 
+    api_url = dart_api_information.DartUrl.get_corp_code_url()
+    url = api_url + "?crtfc_key=" + api_key
     corp_code = ""
     corp_name_list = []
 
-    # temp
-    stock_code = "000250"
-
-    if corp_name == "":
-        corp_name = "do not search by this"
-    elif stock_code == "" and corp_name == "":
+    if stock_code == "" and corp_name == "":
         print("해당 기업의 정보가 존재하지 않습니다.")
-        return -1
+        return -1, "error"
+    elif corp_name == "":
+        corp_name = "do not search by this"
+
 
     # The bytes of the received resp are accumulated in the buffer and the zip file is loaded.
     openurl = urlopen(url)
@@ -58,7 +55,9 @@ def get_corp_code(corp_name, stock_code):
     # find one corp_code
     if len(corp_name_list) == 0:
         print("해당 기업의 정보가 존재하지 않습니다.")
-        return -1
+
+        return -1, "error"
+
     elif len(corp_name_list) == 1:
         corp_name = corp_name_list[0].find('corp_name').get_text()
         print("선택하신 종목 : " + corp_name)
@@ -81,4 +80,5 @@ def get_corp_code(corp_name, stock_code):
                 stock_code = name_list.find('stock_code').get_text()
                 break
 
-    return corp_code
+    return corp_code, corp_name
+

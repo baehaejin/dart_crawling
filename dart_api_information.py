@@ -38,3 +38,15 @@ class DartUrl:
         :return: this return url that you can get rcept_no
         """
         return __privateGetReceptionNoUrl
+
+    @staticmethod
+    def get_document_url():
+        # this url get document by rcept_no and api key
+        __privateGetDocumentURL = "	https://opendart.fss.or.kr/api/document.xml"
+        """
+        you need to add
+        : ?crtfc_key=your own api key
+        : &rcept_no=recept number
+        """
+        return __privateGetDocumentURL
+

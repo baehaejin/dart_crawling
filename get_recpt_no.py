@@ -8,19 +8,14 @@ def get_rcrpt_no(corp_name, corp_code, bgn_de, end_de, page_no, page_count):
     today = time.strftime('%Y%m%d', time.localtime(time.time()))
     print("today is : " + today)
 
+    report_nm_list = []
     rcept_no_list = []
-
-    # temp
-    corp_name = "삼천당제약"
-    corp_code = "00128546"
-    bgn_de = "20100817"
-    end_de = "20200817"
-    page_no = "1"
-    page_count = "10"
 
     # get url and api_key from dart_api_information
     api_key = dart_api_information.DartKey.get_key()
     api_url = dart_api_information.DartUrl.get_rcept_no_url()
+
+
     url = (api_url +
            "?crtfc_key=" + api_key +
            "&corp_code=" + corp_code +
@@ -63,8 +58,10 @@ def get_rcrpt_no(corp_name, corp_code, bgn_de, end_de, page_no, page_count):
 
             if y == 'y' or y == 'Y':
                 rcept_no_list.append(rcept_no)
+
+                report_nm_list.append(report_nm)
                 print(report_nm + " 가 추가되었습니다")
-    return rcept_no_list
+    return rcept_no_list, report_nm_list
 
 
 
