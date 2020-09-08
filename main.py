@@ -23,8 +23,8 @@ def main():
         bgn_de = str(int(today) - 600)
         print()
 
-        print("오늘의 날짜 : " + bgn_de)
-        print("6개월전 : " + end_de)
+        print("오늘의 날짜 : " + end_de)
+        print("6개월전 : " + bgn_de)
 
         if input("현재 날짜를 원하지 않으시면 n키를 누른 후 enter를 입력해 주세요.(enter를 누르면 위 날짜로 공시검색)") == "n":
             bgn_de = input("시작일을 입력해 주세요 20XXXXXX : ")
@@ -33,10 +33,14 @@ def main():
         print("검색중입니다 잠시만 기다려 주세요")
         print()
         rcept_no_list, report_nm_list = get_recpt_no.get_rcrpt_no(corp_name, corp_code, bgn_de, end_de, '1', '100')
-
         for rcept_no, report_nm in zip(rcept_no_list, report_nm_list):
             document = get_document.get_document(rcept_no, report_nm)
-            export_excel.export_excel(corp_name, document, report_nm)
+            if document == "BadZipFile":
+                print()
+                print(report_nm + "의 내용은 현재 삭제되었습니다")
+                continue
+            else:
+                export_excel.export_excel(corp_name, document, report_nm)
         print()
         print("====================================================================")
         print()
@@ -49,3 +53,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
