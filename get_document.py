@@ -1,5 +1,5 @@
 from urllib.request import urlopen
-from zipfile import ZipFile
+from zipfile import ZipFile, BadZipFile
 from io import BytesIO
 from bs4 import BeautifulSoup
 import dart_api_information
@@ -15,17 +15,27 @@ def get_document(rcept_no, report_nm):
     url = api_url + "?crtfc_key=" + api_key + "&rcept_no=" + rcept_no
 
     open_url = urlopen(url)
-    with ZipFile(BytesIO(open_url.read())) as zf:
-        file_list = zf.namelist()
-
-        while len(file_list) > 0:
-            file_name = file_list.pop()
-            # zipfile decode because it is bytes code
-            zf_open = zf.open(file_name).read()
-
-            break
+    try:
+        with ZipFile(BytesIO(open_url.read())) as zf:
+            file_list = zf.namelist()
+            # print(file_list)
+            # print(type(file_list[2]))
+            # print(rcept_no + ".xml")
+            for index, file in enumerate(file_list, 0):
+                if (rcept_no + ".xml") == file.replace("/", ""):
+                    file_name = file_list[index]
+                    # zipfile decode because it is bytes code
+                    zf_open = zf.open(file_name).read()
+                    break
+                # while len(file_list) > 0:
+                #     file_name = file_list.pop()
+                #     # zipfile decode because it is bytes code
+                #     zf_open = zf.open(file_name).read()
+                #     break
+    except (IOError, BadZipFile):
+        return "BadZipFile"
+    # print(zf_open)
     soup = BeautifulSoup(zf_open, 'html.parser')
-
     res = soup.find_all("section-2")
 
     for n in res:
