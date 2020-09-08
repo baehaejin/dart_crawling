@@ -50,17 +50,13 @@ def get_rcrpt_no(corp_name, corp_code, bgn_de, end_de, page_no, page_count):
         report_nm = n.find('report_nm').get_text()
         rcept_no = n.find('rcept_no').get_text()
         rcept_dt = n.find('rcept_dt').get_text()
-        if "반기보고서" in report_nm or "분기보고서" in report_nm:
+        if "반기보고서" in report_nm or "분기보고서" in report_nm or "사업보고서" in report_nm:
             print()
             print(str(i) + ". " + corp_name + "    보고서 종류: " + report_nm + "    보고서 날짜: " + rcept_dt)
             i += 1
-            y = input("해당 공시 내용이 필요하면 y를 입력하고 enter를 누르세요 : ")
-
-            if y == 'y' or y == 'Y':
-                rcept_no_list.append(rcept_no)
-
-                report_nm_list.append(report_nm)
-                print(report_nm + " 가 추가되었습니다")
+            rcept_no_list.append(rcept_no)
+            report_nm_list.append(report_nm)
+            print(report_nm + " 가 추가되었습니다")
     return rcept_no_list, report_nm_list
 
 
